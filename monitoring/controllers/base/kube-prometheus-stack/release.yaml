@@ -44,6 +44,6 @@ spec:
         ## Secret must be manually created in the namespace
         ##
         tls:
-        - secretName: grafana-tls-secret
-           hosts:
-             - grs.lucasbee066.org
+          - secretName: grafana-tls-secret
+            hosts:
+              - grs.lucasbee066.org
