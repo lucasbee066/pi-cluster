@@ -43,7 +43,7 @@ spec:
         ## TLS configuration for Prometheus Ingress
         ## Secret must be manually created in the namespace
         ##
-        tls: []
-          # - secretName: prometheus-general-tls
-          #   hosts:
-          #     - prometheus.example.com
+        tls:
+        - secretName: grafana-tls-secret
+           hosts:
+             - grs.lucasbee066.org
