@@ -52,6 +52,7 @@ spec:
           - mountPath: /podcasts
             subPath: podcasts
             name: audiobookshelf-data
+
       volumes:
         - name: audiobookshelf-data
           persistentVolumeClaim:
