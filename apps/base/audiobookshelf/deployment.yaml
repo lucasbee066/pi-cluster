@@ -55,4 +55,4 @@ spec:
       volumes:
         - name: audiobookshelf-data
           persistentVolumeClaim:
-          claimName: audiobookshelf-data-pvc
+            claimName: audiobookshelf-data-pvc
