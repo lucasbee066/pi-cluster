@@ -39,15 +39,15 @@ spec:
             - mountPath: /metadata
               subPath: metadata
               name: abd
-            #- mountPath: /audiobooks
-              #  subPath: audiobooks
-              #name: audiobookshelf-data
-            #- mountPath: /books
-              #  subPath: books
-              #name: audiobookshelf-data
-            # - mountPath: /podcasts
-              # subPath: podcasts
-              # name: audiobookshelf-data
+            - mountPath: /audiobooks
+              subPath: audiobooks
+              name: abd
+            - mountPath: /books
+              subPath: books
+              name: abd
+            - mountPath: /podcasts
+              subPath: podcasts
+              name: abd
       volumes:
         - name: abd
           persistentVolumeClaim:
