@@ -24,8 +24,8 @@ spec:
             - containerPort: 80
 
           envFrom:
-            #- configMapRef:
-            #    name: linkding-configmap
+            - configMapRef:
+                name: audiobookshelf-config
             #- secretRef:
             #    name: linkding-container-env
 
