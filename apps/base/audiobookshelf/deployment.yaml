@@ -34,7 +34,7 @@ spec:
 
           volumeMounts:
             - mountPath: /config
-              subPath: config
+              # subPath: config
               name: audiobookshelf-data
             # - mountPath: /metadata
               #  subPath: metadata
