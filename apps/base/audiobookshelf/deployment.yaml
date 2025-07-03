@@ -35,7 +35,7 @@ spec:
           volumeMounts:
             - mountPath: /config
               # subPath: config
-              name: audiobookshelf-data
+              name: abd
             # - mountPath: /metadata
               #  subPath: metadata
               #name: audiobookshelf-data
@@ -49,6 +49,6 @@ spec:
               # subPath: podcasts
               # name: audiobookshelf-data
       volumes:
-        - name: audiobookshelf-data
+        - name: abd 
           persistentVolumeClaim:
             claimName: audiobookshelf-data-pvc
