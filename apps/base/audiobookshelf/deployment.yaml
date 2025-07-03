@@ -36,9 +36,9 @@ spec:
             - mountPath: /config
               subPath: config
               name: abd
-            # - mountPath: /metadata
-              #  subPath: metadata
-              #name: audiobookshelf-data
+            - mountPath: /metadata
+              subPath: metadata
+              name: audiobookshelf-data
             #- mountPath: /audiobooks
               #  subPath: audiobooks
               #name: audiobookshelf-data
