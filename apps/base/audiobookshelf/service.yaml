@@ -2,9 +2,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: audiobookshelf
+  namespace: audiobookshelf
 spec:
   ports:
-    - port: 3005
+    - port: 3005 #external port what cloudflared will call
+      targetPort: 80 #internal pod port
   selector:
     app: audiobookshelf
   type: ClusterIP
