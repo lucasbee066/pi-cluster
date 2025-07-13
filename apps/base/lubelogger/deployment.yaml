@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lubelogger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lubelogger
+  template:
+    metadata:
+      labels:
+        app: lubelogger
+    spec:
+      #securityContext:
+       # fsGroup: 1000 # node group ID
+       # runAsUser: 1000 # node user ID
+       # runAsGroup: 1000 # node group ID
+
+      containers:
+        - name: lubelogger
+          image: ghcr.io/hargata/lubelogger:1.4.9
+          ports:
+            - containerPort: 8081
+              targetPort: 8080
+
+          #envFrom:
+            #- configMapRef:
+            #    name: audiobookshelf-config
+            #- secretRef:
+            #    name: linkding-container-env
+
+          securityContext:
+            allowPrivilegeEscalation: false
