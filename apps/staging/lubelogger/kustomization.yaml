@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: lubelogger
 resources:
   - ../../base/lubelogger/
+  - cloudflare.yaml
