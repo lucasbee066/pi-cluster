@@ -13,8 +13,8 @@ spec:
         app: lubelogger
     spec:
       # securityContext:
-        #  fsGroup: 33 # node group ID
-        # runAsUser: 33 # node user ID
+        #fsGroup: 33 # node group ID
+        #runAsUser: 33 # node user ID
         #runAsGroup:  # node group ID
 
       containers:
