@@ -29,5 +29,5 @@ spec:
             #- secretRef:
             #    name: linkding-container-env
 
-            allowPrivilegeEscalation: false
           securityContext:
+            allowPrivilegeEscalation: false
