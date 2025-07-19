@@ -12,10 +12,10 @@ spec:
       labels:
         app: lubelogger
     spec:
-      #securityContext:
-       # fsGroup: 1000 # node group ID
-       # runAsUser: 1000 # node user ID
-       # runAsGroup: 1000 # node group ID
+      securityContext:
+        fsGroup: 33 # node group ID
+        runAsUser: 33 # node user ID
+        runAsGroup: 33 # node group ID
 
       containers:
         - name: lubelogger
