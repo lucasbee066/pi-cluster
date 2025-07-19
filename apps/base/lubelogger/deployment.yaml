@@ -13,10 +13,11 @@ spec:
         app: lubelogger
     spec:
       securityContext:
-        fsGroup: 1654 # node group ID
-        runAsUser: 1654 # node user ID
-        runAsGroup: 1654 # node group ID
-
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+      
       containers:
         - name: lubelogger
           image: ghcr.io/hargata/lubelogger:v1.4.9
