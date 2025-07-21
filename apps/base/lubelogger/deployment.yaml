@@ -23,6 +23,13 @@ spec:
           image: ghcr.io/hargata/lubelogger:v1.4.9
           ports:
             - containerPort: 8080
+          
+          env:
+            - name: POSTGRES_CONNECTION
+              valueFrom:
+                secretKeyRef:
+                  name: pg-lubelogger-db-secret
+                  key: POSTGRES_CONNECTION
 
           #envFrom:
             #- configMapRef:
