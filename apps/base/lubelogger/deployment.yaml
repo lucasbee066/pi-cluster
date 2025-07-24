@@ -30,7 +30,9 @@ spec:
                 secretKeyRef:
                   name: pg-lubelogger-db-secret
                   key: POSTGRES_CONNECTION
-
+          volumeMounts:
+            - mountPath: "/App/data"
+              name: app-data
           #envFrom:
             #- configMapRef:
             #    name: audiobookshelf-config
@@ -39,3 +41,7 @@ spec:
 
           securityContext:
             allowPrivilegeEscalation: false
+      volumes:
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: lubelogger-fe-pvc
