@@ -3,6 +3,5 @@ kind: Kustomization
 
 # Pull the published plugin manifest directly from GitHub
 resources:
-  - namespace.yaml
   - https://github.com/cert-manager/cert-manager/releases/download/v1.18.2/cert-manager.crds.yaml
   - https://github.com/cert-manager/cert-manager/releases/download/v1.18.2/cert-manager.yaml
