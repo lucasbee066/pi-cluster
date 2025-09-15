@@ -4,3 +4,4 @@ resources:
   - deployment.yaml
   - secret.yaml
   - objectstore.yaml
+  - role.yaml
