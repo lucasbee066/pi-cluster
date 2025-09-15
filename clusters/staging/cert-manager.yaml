@@ -9,5 +9,3 @@ spec:
   prune: true
   wait: true
   timeout: 5m
-  # targetNamespace is optional since the base already sets namespace: cert-manager
-  targetNamespace: cert-manager
