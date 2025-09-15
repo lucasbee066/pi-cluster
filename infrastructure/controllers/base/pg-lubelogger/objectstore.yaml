@@ -11,10 +11,10 @@ spec:
     # Reuse the sops/age-encrypted Secret you created earlier
     s3Credentials:
       accessKeyId:
-        name: s3-lubelogger-credentials
+        name: aws-creds
         key: ACCESS_KEY_ID
       secretAccessKey:
-        name: s3-lubelogger-credentials
+        name: aws-creds
         key: ACCESS_SECRET_KEY
       #region:
         #  name: s3-lubelogger-credentials
