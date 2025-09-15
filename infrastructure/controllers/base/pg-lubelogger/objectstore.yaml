@@ -5,29 +5,30 @@ metadata:
 spec:
   # Base backups + WALs will be written under this path.
   # Add a folder/prefix if you want (recommended to keep things tidy).
-  destinationPath: "s3://pg-lubelogger/lubelogger"
+  configuration:
+    destinationPath: "s3://pg-lubelogger/lubelogger"
 
-  # Reuse the sops/age-encrypted Secret you created earlier
-  s3Credentials:
-    accessKeyId:
-      name: s3-lubelogger-credentials
-      key: ACCESS_KEY_ID
-    secretAccessKey:
-      name: s3-lubelogger-credentials
-      key: ACCESS_SECRET_KEY
-    #region:
-      #  name: s3-lubelogger-credentials
-      # key: AWS_REGION
-    # If you ever need to talk to non-AWS S3 (MinIO/Ceph), add:
-    # endpointURL: "https://minio.example:9000"
+    # Reuse the sops/age-encrypted Secret you created earlier
+    s3Credentials:
+      accessKeyId:
+        name: s3-lubelogger-credentials
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: s3-lubelogger-credentials
+        key: ACCESS_SECRET_KEY
+      #region:
+        #  name: s3-lubelogger-credentials
+        # key: AWS_REGION
+      # If you ever need to talk to non-AWS S3 (MinIO/Ceph), add:
+      # endpointURL: "https://minio.example:9000"
 
-  # Optional tuning
-  wal:
-    compression: gzip
-    maxParallel: 8
-  # You can also set:
-  # data:
-  #   compression: gzip
-  # Server-side encryption examples:
-  # sse: "AES256"
-  # sseKmsKeyId: "arn:aws:kms:<region>:<acct>:key/<key-id>"
+    # Optional tuning
+    wal:
+      compression: gzip
+      maxParallel: 8
+    # You can also set:
+    # data:
+    #   compression: gzip
+    # Server-side encryption examples:
+    # sse: "AES256"
+    # sseKmsKeyId: "arn:aws:kms:<region>:<acct>:key/<key-id>"
