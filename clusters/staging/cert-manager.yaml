@@ -4,8 +4,12 @@ metadata:
   name: cert-manager
   namespace: flux-system
 spec:
-  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: pi-cluster
+    namespace: flux-system
   path: ./infrastructure/controllers/base/cert-manager
+  interval: 1m
   prune: true
   wait: true
   timeout: 5m
