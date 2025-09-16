@@ -10,4 +10,3 @@ spec:
     name: barman-cloud.cloudnative-pg.io
     schedule: "30 3 * * 0"      # Sundays @ 03:30
     immediate: true
-    backupOwnerReference: self
