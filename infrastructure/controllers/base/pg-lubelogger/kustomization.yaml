@@ -5,3 +5,4 @@ resources:
   - secret.yaml
   - objectstore.yaml
   - role.yaml
+  - scheduled-backup.yaml

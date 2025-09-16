@@ -1,0 +1,14 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: pg-lubelogger-weekly
+spec:
+  cluster:
+    name: pg-lubelogger
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
+  schedule: "30 3 * * 0"      # Sundays @ 03:30
+  immediate: true
+  backupOwnerReference: self
+  retentionPolicy: "4w"       # keep ~4 weeks of weeklies
