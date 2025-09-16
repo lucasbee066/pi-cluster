@@ -27,4 +27,4 @@ spec:
       compression: gzip
       maxParallel: 8
     
-    retentionPolicy: "4w"       # keep ~4 weeks of weeklies
+  retentionPolicy: "4w"       # keep ~4 weeks of weeklies
