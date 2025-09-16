@@ -11,4 +11,3 @@ spec:
   schedule: "30 3 * * 0"      # Sundays @ 03:30
   immediate: true
   backupOwnerReference: self
-  retentionPolicy: "4w"       # keep ~4 weeks of weeklies

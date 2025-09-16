@@ -26,9 +26,5 @@ spec:
     wal:
       compression: gzip
       maxParallel: 8
-    # You can also set:
-    # data:
-    #   compression: gzip
-    # Server-side encryption examples:
-    # sse: "AES256"
-    # sseKmsKeyId: "arn:aws:kms:<region>:<acct>:key/<key-id>"
+    
+    retentionPolicy: "4w"       # keep ~4 weeks of weeklies
