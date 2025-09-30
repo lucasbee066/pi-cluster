@@ -1,0 +1,15 @@
+# longhorn-rwx (for shared volumes mounted by multiple pods/nodes)
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: longhorn-rwx
+provisioner: driver.longhorn.io
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  numberOfReplicas: "2"
+  dataLocality: "best-effort"
+  replicaAutoBalance: "least-effort"
+  # RWX is enabled at the volume level by Longhorn using its share-manager (NFS) automatically.
+  fsType: "ext4"
