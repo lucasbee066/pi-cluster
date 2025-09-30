@@ -13,29 +13,33 @@ spec:
         app: linkding
     spec:
       securityContext:
-        fsGroup: 33 # www-data group ID
-        runAsUser: 33 # www-data user ID
-        runAsGroup: 33 # www-data group ID
-
+        fsGroup: 33         # www-data group
+        runAsUser: 33       # www-data user
+        runAsGroup: 33
       containers:
         - name: linkding
           image: sissbruecker/linkding:1.39.1
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9090
-
           envFrom:
-            #- configMapRef:
-            #    name: linkding-configmap
             - secretRef:
                 name: linkding-container-env
-
           securityContext:
             allowPrivilegeEscalation: false
-
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+              ephemeral-storage: "512Mi"
+            limits:
+              memory: "512Mi"
+              ephemeral-storage: "2Gi"
           volumeMounts:
-          - mountPath: "/etc/linkding/data"
-            name: linkding-data
+            - name: linkding-data
+              mountPath: /etc/linkding/data
       volumes:
         - name: linkding-data
           persistentVolumeClaim:
             claimName: linkding-data-longhorn
+
