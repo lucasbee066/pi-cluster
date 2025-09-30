@@ -5,3 +5,4 @@ resources:
 - pg-lubelogger
 - cnpg-barman-plugin
 - cert-manager
+- storageclass
