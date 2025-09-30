@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - deployment.yaml
-  - storage-longhorn.yaml
+  - storage-longhorn-v2.yaml
   - service.yaml
   
