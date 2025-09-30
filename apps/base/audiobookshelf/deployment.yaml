@@ -51,4 +51,4 @@ spec:
       volumes:
         - name: abd
           persistentVolumeClaim:
-            claimName: audiobookshelf-data-pvc
+            claimName: audiobookshelf-data-longhorn
