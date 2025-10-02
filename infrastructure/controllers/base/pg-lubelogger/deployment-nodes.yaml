@@ -4,7 +4,7 @@ metadata:
   name: pg-lubelogger-nodes
   namespace: lubelogger
 spec:
-  instances: 3
+  instances: 2
 
   # Keep the new DB off the control plane (hl1)
   affinity:
@@ -32,7 +32,7 @@ spec:
         cnpg.io/cluster: pg-lubelogger-nodes
 
   storage:
-    size: 5Gi
+    size: 1Gi
     storageClass:  longhorn-gp # e.g., longhorn, nfs-client, etc.
 
   # Restore from your existing Barman S3 backups
