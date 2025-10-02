@@ -4,7 +4,7 @@ metadata:
   name: pg-lubelogger-nodes
   namespace: lubelogger
 spec:
-  instances: 2
+  instances: 3
 
   # Keep the new DB off the control plane (hl1)
   affinity:
@@ -23,14 +23,6 @@ spec:
         barmanObjectName: pg-lubelogger
   
         # Spread replicas across workers if possible
-  topologySpreadConstraints:
-  - maxSkew: 1
-    topologyKey: kubernetes.io/hostname
-    whenUnsatisfiable: ScheduleAnyway
-    labelSelector:
-      matchLabels:
-        cnpg.io/cluster: pg-lubelogger-nodes
-
   storage:
     size: 1Gi
     storageClass:  longhorn-gp # e.g., longhorn, nfs-client, etc.
