@@ -7,8 +7,13 @@ spec:
   instances: 3
 
   # Keep the new DB off the control plane (hl1)
-  nodeSelector:
-    node-role.kubernetes.io/worker: ""
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: node-role.kubernetes.io/worker
+            operator: Exists
 
   imageName: ghcr.io/cloudnative-pg/postgresql:15
   plugins:
