@@ -47,6 +47,6 @@ spec:
           key: AWS_SECRET_ACCESS_KEY
         region:
           name: aws-creds-node
-          key: AWS_REGION
+          key: AWS-REGION
       wal:
         compression: gzip
