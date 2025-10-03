@@ -25,7 +25,7 @@ spec:
         # Spread replicas across workers if possible
   storage:
     size: 1Gi
-    storageClass:  longhorn-gp # e.g., longhorn, nfs-client, etc.
+    storageClass:  longhorn-single # e.g., longhorn, nfs-client, etc.
 
   # Restore from your existing Barman S3 backups
   bootstrap:
