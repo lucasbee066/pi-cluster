@@ -40,13 +40,13 @@ spec:
       # endpointURL: ""                        # leave empty for AWS S3
       s3Credentials:
         accessKeyId:
-          name: aws-creds-node
+          name: aws-creds-nodev1
           key: AWS_ACCESS_KEY_ID
         secretAccessKey:
-          name: aws-creds-node
+          name: aws-creds-nodev1
           key: AWS_SECRET_ACCESS_KEY
         region:
-          name: aws-creds-node
+          name: aws-creds-nodev1
           key: AWS_REGION
       wal:
         compression: gzip

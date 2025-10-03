@@ -11,13 +11,13 @@ spec:
     # Reuse the sops/age-encrypted Secret you created earlier
     s3Credentials:
       accessKeyId:
-        name: aws-creds-node
+        name: aws-creds-nodev1
         key:  AWS_ACCESS_KEY_ID
       secretAccessKey:
-        name: aws-creds-node
+        name: aws-creds-nodev1
         key: AWS_SECRET_ACCESS_KEY
       region:
-         name: aws-creds-node
+         name: aws-creds-nodev1
          key: AWS_REGION
       # If you ever need to talk to non-AWS S3 (MinIO/Ceph), add:
       # endpointURL: "https://minio.example:9000"
