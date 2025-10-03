@@ -30,9 +30,9 @@ spec:
   # Restore from your existing Barman S3 backups
   bootstrap:
      recovery:
-      source: s3-backups
-      target:
-        backupID: "20250916T144306"
+       source: s3-backups
+       target:
+         backupID: "20250916T144306"
 
   # Tell CNPG where the backups live
   externalClusters:
