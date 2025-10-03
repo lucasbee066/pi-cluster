@@ -4,3 +4,4 @@ resources:
 - longhorn-gp.yaml
 - longhorn-gp-immediate.yaml
 - longhorn-rwx.yaml
+- longhorn-gp-single.yaml
