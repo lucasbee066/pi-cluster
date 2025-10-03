@@ -4,7 +4,7 @@ metadata:
   name: pg-lubelogger-nodes
   namespace: lubelogger
 spec:
-  instances: 3
+  instances: 1
 
   # Keep the new DB off the control plane (hl1)
   affinity:
