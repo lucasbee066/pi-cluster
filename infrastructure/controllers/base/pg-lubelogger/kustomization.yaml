@@ -4,6 +4,8 @@ resources:
   - deployment.yaml
   - deployment-nodes.yaml
   - secret.yaml
+  - secret-node.yaml
   - objectstore.yaml
+  - objectstore-nodes.yaml
   - role.yaml
   - scheduled-backup.yaml

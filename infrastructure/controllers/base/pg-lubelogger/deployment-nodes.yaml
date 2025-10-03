@@ -20,7 +20,7 @@ spec:
     - name: barman-cloud.cloudnative-pg.io
       isWALArchiver: true
       parameters:
-        barmanObjectName: pg-lubelogger
+        barmanObjectName: pg-lubelogger-nodes
   
         # Spread replicas across workers if possible
   storage:
@@ -28,24 +28,25 @@ spec:
     storageClass:  longhorn-gp # e.g., longhorn, nfs-client, etc.
 
   # Restore from your existing Barman S3 backups
-  #bootstrap:
-    # recovery:
-     # source: s3-backups
-      # Optional Point-In-Time recovery example:
-      # recoveryTarget:
-      #   targetTime: "2025-09-28 15:30:00+00"
+  bootstrap:
+     recovery:
+      source: s3-backups
 
   # Tell CNPG where the backups live
-  #externalClusters:
-#- name: s3-backups
-    #   barmanObjectStore:
-      #  destinationPath: "s3://pg-lubelogger/lubelogger"
-      #s3Credentials:
-       # accessKeyId:
-        #  name: aws-creds
-         # key: ACCESS_KEY_ID
-        #secretAccessKey:
-         # name: aws-creds
-          #key: ACCESS_SECRET_KEY
-      #wal:
-       # compression: gzip
+  externalClusters:
+  - name: s3-backups
+    barmanObjectStore:
+      destinationPath: "s3://pg-lubelogger/lubelogger"
+      # endpointURL: ""                        # leave empty for AWS S3
+      s3Credentials:
+        accessKeyId:
+          name: aws-creds-node
+          key: AWS_ACCESS_KEY_ID
+        secretAccessKey:
+          name: aws-creds-node
+          key: AWS_SECRET_ACCESS_KEY
+        region:
+          name: aws-creds-node
+          key: AWS_REGION
+      wal:
+        compression: gzip

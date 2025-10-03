@@ -1,0 +1,30 @@
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: pg-lubelogger-nodes
+spec:
+  # Base backups + WALs will be written under this path.
+  # Add a folder/prefix if you want (recommended to keep things tidy).
+  configuration:
+    destinationPath: "s3://pg-lubelogger/lubelogger"
+
+    # Reuse the sops/age-encrypted Secret you created earlier
+    s3Credentials:
+      accessKeyId:
+        name: aws-creds-node
+        key:  AWS_ACCESS_KEY_ID
+      secretAccessKey:
+        name: aws-creds-node
+        key: AWS_SECRET_ACCESS_KEY
+      region:
+         name: aws-creds-node
+         key: AWS_REGION
+      # If you ever need to talk to non-AWS S3 (MinIO/Ceph), add:
+      # endpointURL: "https://minio.example:9000"
+
+    # Optional tuning
+    wal:
+      compression: gzip
+      maxParallel: 8
+    
+  retentionPolicy: "4w"       # keep ~4 weeks of weeklies
