@@ -9,4 +9,3 @@ resources:
   - objectstore-nodes.yaml
   - role.yaml
   - scheduled-backup.yaml
-  - smoke-deployment.yaml

@@ -31,12 +31,15 @@ spec:
   bootstrap:
      recovery:
       source: s3-backups
+      target:
+        backupID: "20250916T144306"
 
   # Tell CNPG where the backups live
   externalClusters:
   - name: s3-backups
     barmanObjectStore:
       destinationPath: "s3://pg-lubelogger/lubelogger"
+      serverName: "pg-lubelogger"
       # endpointURL: ""                        # leave empty for AWS S3
       s3Credentials:
         accessKeyId:
