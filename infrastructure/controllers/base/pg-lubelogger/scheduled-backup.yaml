@@ -7,7 +7,7 @@ spec:
   immediate: true
   backupOwnerReference: self
   cluster:
-    name: pg-lubelogger
+    name: pg-lubelogger-nodes
   method: plugin
   pluginConfiguration:
     name: barman-cloud.cloudnative-pg.io

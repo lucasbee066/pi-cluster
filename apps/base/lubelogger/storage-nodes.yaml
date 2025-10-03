@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: lubelogger-fe-longhorn
+  namespace: lubelogger
+spec:
+  accessModes: ["ReadWriteOnce"]
+  storageClassName: longhorn-gp-immediate          # or: longhorn-single
+  resources:
+    requests:
+      storage: 2Gi
+
