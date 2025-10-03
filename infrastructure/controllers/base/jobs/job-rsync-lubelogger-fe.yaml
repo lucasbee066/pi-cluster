@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rsync-lubelogger-fe
+  namespace: lubelogger
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: rsync
+        image: alpine:3.20
+        command: ["/bin/sh","-lc"]
+        args:
+          - |
+            set -e
+            apk add --no-cache rsync
+            # initial copy
+            rsync -aHAX --delete /src/ /dst/
+            # show result
+            echo "Copied contents:"; find /dst -maxdepth 2 -type d -print
+        volumeMounts:
+        - name: src
+          mountPath: /src
+        - name: dst
+          mountPath: /dst
+      volumes:
+      - name: src
+        persistentVolumeClaim:
+          claimName: lubelogger-fe-pvc          # old local-path PVC (source)
+      - name: dst
+        persistentVolumeClaim:
+          claimName: lubelogger-fe-longhorn     # new Longhorn PVC (dest)
