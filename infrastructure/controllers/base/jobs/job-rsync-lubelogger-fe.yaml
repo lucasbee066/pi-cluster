@@ -4,21 +4,33 @@ metadata:
   name: rsync-lubelogger-fe
   namespace: lubelogger
 spec:
+  backoffLimit: 1
   template:
     spec:
       restartPolicy: OnFailure
+      # Pin to the node that hosts the local-path PV (replace hl2 if different)
+      nodeSelector:
+        kubernetes.io/hostname: hl1
       containers:
       - name: rsync
-        image: alpine:3.20
-        command: ["/bin/sh","-lc"]
+        # rsync + bash preinstalled; no apk needed
+        image: bitnami/rsync:latest
+        command: ["/bin/bash","-lc"]
         args:
           - |
-            set -e
-            apk add --no-cache rsync
-            # initial copy
-            rsync -aHAX --delete /src/ /dst/
-            # show result
-            echo "Copied contents:"; find /dst -maxdepth 2 -type d -print
+            set -euo pipefail
+            echo "Listing source and destination..."
+            du -sh /src || true; du -sh /dst || true
+            echo "Starting rsync..."
+            rsync -avh --info=progress2 --numeric-ids \
+                  --delete --inplace \
+                  /src/ /dst/
+            echo "Done. Verifying counts..."
+            src_cnt=$(find /src -type f | wc -l); dst_cnt=$(find /dst -type f | wc -l)
+            echo "Files: src=$src_cnt dst=$dst_cnt"
+        securityContext:
+          runAsUser: 0
+          runAsGroup: 0
         volumeMounts:
         - name: src
           mountPath: /src
@@ -27,7 +39,7 @@ spec:
       volumes:
       - name: src
         persistentVolumeClaim:
-          claimName: lubelogger-fe-pvc          # old local-path PVC (source)
+          claimName: lubelogger-fe-pvc            # old local-path PVC (source)
       - name: dst
         persistentVolumeClaim:
-          claimName: lubelogger-fe-longhorn     # new Longhorn PVC (dest)
+          claimName: lubelogger-fe-longhorn       # new Longhorn PVC (target)
