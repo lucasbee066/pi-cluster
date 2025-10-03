@@ -31,8 +31,7 @@ spec:
   bootstrap:
      recovery:
        source: s3-backups
-       target:
-         backupID: "20250916T144306"
+       backupID: "20250916T144306"
 
   # Tell CNPG where the backups live
   externalClusters:
