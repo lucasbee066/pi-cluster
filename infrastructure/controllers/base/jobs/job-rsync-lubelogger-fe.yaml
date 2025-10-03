@@ -8,18 +8,24 @@ spec:
   template:
     spec:
       restartPolicy: OnFailure
-      # Pin to the node that hosts the local-path PV (replace hl2 if different)
+      # 1) Pin to the node that hosts the local-path PV
       nodeSelector:
         kubernetes.io/hostname: hl1
+
+      # 2) Tolerate the control-plane taint on hl1
+      tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
+
       containers:
       - name: rsync
-        # rsync + bash preinstalled; no apk needed
-        image: bitnami/rsync:latest
+        image: bitnami/rsync:latest   # rsync preinstalled; no apk
         command: ["/bin/bash","-lc"]
         args:
           - |
             set -euo pipefail
-            echo "Listing source and destination..."
+            echo "Listing source and destination sizes (may take a moment)..."
             du -sh /src || true; du -sh /dst || true
             echo "Starting rsync..."
             rsync -avh --info=progress2 --numeric-ids \
@@ -43,3 +49,4 @@ spec:
       - name: dst
         persistentVolumeClaim:
           claimName: lubelogger-fe-longhorn       # new Longhorn PVC (target)
+
