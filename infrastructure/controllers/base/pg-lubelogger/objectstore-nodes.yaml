@@ -18,7 +18,7 @@ spec:
         key: AWS_SECRET_ACCESS_KEY
       region:
          name: aws-creds-node
-         key: AWS-REGION
+         key: AWS_REGION
       # If you ever need to talk to non-AWS S3 (MinIO/Ceph), add:
       # endpointURL: "https://minio.example:9000"
 

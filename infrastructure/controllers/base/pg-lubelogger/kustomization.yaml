@@ -4,7 +4,7 @@ resources:
   - deployment.yaml
   - deployment-nodes.yaml
   - secret.yaml
-  - secret-node.yaml
+  - secret-nodes.yaml
   - objectstore.yaml
   - objectstore-nodes.yaml
   - role.yaml
