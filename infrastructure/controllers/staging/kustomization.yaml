@@ -6,4 +6,3 @@ resources:
 - cnpg-barman-plugin
 - cert-manager
 - storageclass
-- jobs
