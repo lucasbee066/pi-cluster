@@ -3,4 +3,3 @@ kind: Kustomization
 namespace: lubelogger
 resources:
 - ../../base/pg-lubelogger/
-- pg-lubelogger-secret.yaml
