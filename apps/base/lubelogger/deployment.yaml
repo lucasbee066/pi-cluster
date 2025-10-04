@@ -28,7 +28,7 @@ spec:
             - name: POSTGRES_CONNECTION
               valueFrom:
                 secretKeyRef:
-                  name: pg-lubelogger-db-secret
+                  name: pg-lubelogger-db-secret-nodes
                   key: POSTGRES_CONNECTION
           volumeMounts:
             - mountPath: "/App/data"
@@ -44,4 +44,4 @@ spec:
       volumes:
         - name: app-data
           persistentVolumeClaim:
-            claimName: lubelogger-fe-pvc
+            claimName: lubelogger-fe-longhorn
