@@ -4,6 +4,5 @@ resources:
   - namespace.yaml
   - deployment.yaml
   - service.yaml
-  - storage.yaml
   - storage-nodes.yaml
   - pg-lubelogger-secret-nodes.yaml
