@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: Linkding
+  name: linkding-s3-backup
 spec:
   schedule: "0 1 * * 0" #Sunday at 1:00 a.m.
   jobTemplate:
