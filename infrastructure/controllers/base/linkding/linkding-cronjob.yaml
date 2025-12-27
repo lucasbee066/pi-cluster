@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: Linkding
+spec:
+  schedule: "0 1 * * 0" #Sunday at 1:00 a.m.
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          securityContext:
+            fsGroup: 33
+            runAsUser: 33
+            runAsGroup: 33
+          containers:
+            - name: Linkding-backup
+              image: amazon/aws-cli:2.17.57
+              imagePullPolicy: IfNotPresent
+              envFrom:
+                - secretRef:
+                    name: linkding-s3-backup
+              env:
+                - name: S3_BUCKET
+                  value: "linkding-data-backup"
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -euo pipefail
+                  TS="$(date -u +%Y-%m-%dT%H-%M-%SZ)"
+                  ARCHIVE="/tmp/linkding-data-${TS}.tar.gz"
+
+                  # Create the backup archive from the mounted PVC path
+                  tar czf "$ARCHIVE" -C /etc/linkding/data .
+
+                   # Upload to S3 (store under a folder prefix)
+                  aws s3 cp "$ARCHIVE" "s3://${S3_BUCKET}/linkding/${TS}/$(basename "$ARCHIVE")"
+
+              volumeMounts:
+                - name: linkding-data
+                  mountPath: /etc/linkding/data
+          restartPolicy: OnFailure
+
+          volumes:
+            - name: linkding-data
+              persistentVolumeClaim:
+                claimName: linkding-data-longhorn-v2
