@@ -8,6 +8,8 @@ spec:
     spec:
       template:
         spec:
+          nodeSelector:
+            kubernetes.io/hostname: hl2
           securityContext:
             fsGroup: 33
             runAsUser: 33
