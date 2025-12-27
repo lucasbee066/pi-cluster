@@ -24,8 +24,9 @@ spec:
                 - |
                   set -euo pipefail
                   TS="$(date -u +%Y-%m-%dT%H-%M-%SZ)"
-                  echo "$TS" > /work/ts
-                  tar czf "/work/linkding-data-${TS}.tar.gz" -C /etc/linkding/data .
+                  ARCHIVE="/work/linkding-data-${TS}.tar.gz"
+                  echo "$ARCHIVE" > /work/archive_path
+                  tar czf "$ARCHIVE" -C /etc/linkding/data .
 
               volumeMounts:
                 - name: linkding-data
@@ -47,12 +48,8 @@ spec:
                 - -c
                 - |
                   set -euo pipefail
-                  TS="$(date -u +%Y-%m-%dT%H-%M-%SZ)"
-                  ARCHIVE="/work/linkding-data-${TS}.tar.gz"
-
-                   # Upload to S3 (store under a folder prefix)
-                  aws s3 cp "$ARCHIVE" "s3://${S3_BUCKET}/linkding/${TS}/$(basename "$ARCHIVE")"
-
+                  ARCHIVE="$(cat /work/archive_path)"
+                  aws s3 cp "$ARCHIVE" "s3://${S3_BUCKET}/linkding/$(basename "$ARCHIVE")"
               volumeMounts:
                 - name: work
                   mountPath: /work
