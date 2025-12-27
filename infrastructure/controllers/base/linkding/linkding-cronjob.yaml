@@ -14,6 +14,24 @@ spec:
             fsGroup: 33
             runAsUser: 33
             runAsGroup: 33
+          initContainers:
+            - name: make-archive
+              image: alpine:3.20
+              imagePullPolicy: IfNotPresent
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -euo pipefail
+                  TS="$(date -u +%Y-%m-%dT%H-%M-%SZ)"
+                  echo "$TS" > /work/ts
+                  tar czf "/work/linkding-data-${TS}.tar.gz" -C /etc/linkding/data .
+
+              volumeMounts:
+                - name: linkding-data
+                  mountPath: /etc/linkding/data
+                - name: work
+                  mountPath: /work
           containers:
             - name: linkding-backup
               image: amazon/aws-cli:2.17.57
@@ -30,20 +48,19 @@ spec:
                 - |
                   set -euo pipefail
                   TS="$(date -u +%Y-%m-%dT%H-%M-%SZ)"
-                  ARCHIVE="/tmp/linkding-data-${TS}.tar.gz"
-
-                  # Create the backup archive from the mounted PVC path
-                  tar czf "$ARCHIVE" -C /etc/linkding/data .
+                  ARCHIVE="/work/linkding-data-${TS}.tar.gz"
 
                    # Upload to S3 (store under a folder prefix)
                   aws s3 cp "$ARCHIVE" "s3://${S3_BUCKET}/linkding/${TS}/$(basename "$ARCHIVE")"
 
               volumeMounts:
-                - name: linkding-data
-                  mountPath: /etc/linkding/data
+                - name: work
+                  mountPath: /work
           restartPolicy: OnFailure
 
           volumes:
             - name: linkding-data
               persistentVolumeClaim:
                 claimName: linkding-data-longhorn-v2
+            - name: work
+              emptyDir: {}
