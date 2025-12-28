@@ -3,7 +3,7 @@ kind: ScheduledBackup
 metadata:
   name: pg-lubelogger-weekly
 spec:
-  schedule: "30 3 * * 7"      # Sundays @ 03:30
+  schedule: "0 30 3 * * 0"      # Sundays @ 03:30
   immediate: true
   backupOwnerReference: self
   cluster:
