@@ -1,0 +1,59 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: lubelogger-fe-s3-backup
+spec:
+  schedule: "0 6 * * 0" #Sunday at 6:00 a.m.
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          nodeSelector:
+            kubernetes.io/hostname: hl2
+          initContainers:
+            - name: make-fe-archive
+              image: alpine:3.20
+              imagePullPolicy: IfNotPresent
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -euo pipefail
+                  TS="$(date -u +%Y-%m-%dT)"
+                  ARCHIVE="/work/lubelogger-fe-s3-data-${TS}.tar.gz"
+                  echo "$ARCHIVE" > /work/archive_path
+                  tar czf "$ARCHIVE" -C /App/data .
+
+              volumeMounts:
+                - name: app-data
+                  mountPath: /App/data
+                - name: work
+                  mountPath: /work
+          containers:
+            - name: lubelogger-fe-backup
+              image: amazon/aws-cli:2.17.57
+              imagePullPolicy: IfNotPresent
+              envFrom:
+                - secretRef:
+                    name: aws-creds-nodev1
+              env:
+                - name: S3_BUCKET
+                  value: "pg-lubelogger"
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -euo pipefail
+                  ARCHIVE="$(cat /work/archive_path)"
+                  aws s3 cp "$ARCHIVE" "s3://${S3_BUCKET}/lubelogger/lubelogger-fe/$(basename "$ARCHIVE")"
+              volumeMounts:
+                - name: work
+                  mountPath: /work
+          restartPolicy: OnFailure
+
+          volumes:
+            - name: app-data
+              persistentVolumeClaim:
+                claimName: lubelogger-fe-longhorn
+            - name: work
+              emptyDir: {}

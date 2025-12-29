@@ -7,3 +7,4 @@ resources:
   - objectstore-nodes.yaml
   - role.yaml
   - scheduled-backup.yaml
+  - lubelogger-fe-cronjob.yaml
