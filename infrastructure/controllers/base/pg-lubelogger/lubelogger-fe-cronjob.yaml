@@ -12,7 +12,7 @@ spec:
             kubernetes.io/hostname: hl2
           initContainers:
             - name: make-fe-archive
-              image: alpine:3.20
+              image: alpine:3.23
               imagePullPolicy: IfNotPresent
               command:
                 - /bin/sh
