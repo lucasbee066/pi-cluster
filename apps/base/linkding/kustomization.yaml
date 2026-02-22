@@ -5,4 +5,4 @@ resources:
   - deployment.yaml
   - storage-longhorn-v2.yaml
   - service.yaml
-  
+  - vaultlinkdingsa.yaml
