@@ -5,3 +5,4 @@ resources:
 - pg-lubelogger
 - linkding
 - vault-auth
+- vault-secrets-operator
