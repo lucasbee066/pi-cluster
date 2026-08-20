@@ -16,6 +16,21 @@ spec:
         fsGroup: 33         # www-data group
         runAsUser: 33       # www-data user
         runAsGroup: 33
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  key: homelab.lucas/workload
+                  operator: In
+                  values:
+                    - "light"
+      tolerations:
+        - key: homelab.lucas/workload
+          operator: "Equal"
+          value: "light"
+          effect: PreferNoSchedule 
       containers:
         - name: linkding
           image: sissbruecker/linkding:1.39.1
