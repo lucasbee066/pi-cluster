@@ -22,15 +22,15 @@ spec:
             - weight: 100
               preference:
                 matchExpressions:
-                  key: homelab.lucas/workload
-                  operator: In
-                  values:
-                    - "light"
+                  - key: homelab.lucas/workload
+                    operator: In
+                    values:
+                      - "light"
       tolerations:
         - key: homelab.lucas/workload
           operator: "Equal"
           value: "light"
-          effect: PreferNoSchedule 
+          effect: PreferNoSchedule
       containers:
         - name: linkding
           image: sissbruecker/linkding:1.39.1
