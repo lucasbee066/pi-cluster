@@ -15,9 +15,8 @@ spec:
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              preference:
-                matchExpressions:
+            nodeSelectorTerms:
+              - matchExpressions:
                   - key: homelab.lucas/workload
                     operator: In
                     values:
