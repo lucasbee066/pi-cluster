@@ -12,6 +12,28 @@ spec:
       labels:
         app: cloudflared
     spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: homelab.lucas/workload
+                    operator: In
+                    values:
+                      - light
+      tolerations:
+        - key: "homelab.lucas/workload"
+          operator: "Equal"
+          value: "light"
+          effect: "PreferNoSchedule"
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: cloudflared
       containers:
       - name: cloudflared
         image: cloudflare/cloudflared:latest
