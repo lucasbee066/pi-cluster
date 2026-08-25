@@ -14,6 +14,14 @@ spec:
         - matchExpressions:
           - key: node-role.kubernetes.io/worker
             operator: Exists
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          preference:
+            matchExpressions:
+            - key: homelabe.lucas/workload
+              operator: In
+              values:
+              - medium
 
   imageName: ghcr.io/cloudnative-pg/postgresql:15
   plugins:
